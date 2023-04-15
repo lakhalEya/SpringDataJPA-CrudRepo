@@ -47,8 +47,7 @@ stages {
       }
     }*/
     
-  stages {
-    stage("Build Docker image") {
+  stage("Build Docker image") {
       steps {
         script {
           docker.build("lkhleya/docker_devops_rep")
