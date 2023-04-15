@@ -3,7 +3,7 @@ version: '3'
 services:
   mysql:
     image: mysql:latest
-    restart: always
+    restart: on-failure
     environment:
       MYSQL_ROOT_PASSWORD: root
     ports:
@@ -13,7 +13,7 @@ services:
 
   nexus:
     image: sonatype/nexus3
-    restart: always
+    restart: on-failure
     volumes:
       - nexus-data:/nexus-data
     ports:
