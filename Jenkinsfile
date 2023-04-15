@@ -40,12 +40,41 @@ stages {
             sh "mvn deploy -DskipTests -DaltDeploymentRepository=esprit-spring-ioc-1.0-releases::default::http://192.168.33.10:8081/repository/Spring_IOC/ -Dusername=admin -Dpassword=nexus"
         }
     }
-    stage('Static code analysis') {
+   
+    /*stage('Static code analysis') {
       steps {
         sh "mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar -Dsonar.host.url=http://192.168.33.10:9000"
       }
+    }*/
+    
+  stages {
+    stage("Build Docker image") {
+      steps {
+        script {
+          docker.build("lkhleya/docker_devops_rep")
+        }
+      }
     }
     
+    stage("Login to Docker Hub") {
+      steps {
+        script {
+          docker.withRegistry("https://index.docker.io/v1/", "docker") {
+            docker.login(username: admin, password: dockerhub)
+          }
+        }
+      }
+    }
+    
+    stage("Push Docker image to Docker Hub") {
+      steps {
+        script {
+          docker.withRegistry("https://index.docker.io/v1/", "docker") {
+            docker.image("lkhleya/docker_devops_rep:tagname").push()
+          }
+        }
+      }
+    }
 
 }
 
