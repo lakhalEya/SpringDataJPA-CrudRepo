@@ -13,6 +13,7 @@ services:
 
   sonarqube:
     image: sonarqube:8.9.7-community
+    restart: on-failure
     ports:
     - "9000:9000"
     - "9092:9092"
