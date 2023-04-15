@@ -11,6 +11,16 @@ services:
       - "33060:33060"
     container_name: mysql-container-compose
 
+  sonarqube:
+    image: sonarqube:8.9.7-community
+    ports:
+    - "9000:9000"
+    - "9092:9092"
+    volumes:
+     - SonarQube_data:/opt/SonarQube/data
+     - SonarQube_extensions:/opt/SonarQube/extensions
+     - SonarQube_logs:/opt/SonarQube/logs
+     
   nexus:
     image: sonatype/nexus3
     restart: on-failure
@@ -25,4 +35,6 @@ services:
 
 volumes:
   nexus-data:
-
+  SonarQube_data:
+  SonarQube_extensions:
+  SonarQube_logs:
