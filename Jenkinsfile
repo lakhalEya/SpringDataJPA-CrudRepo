@@ -55,16 +55,7 @@ stages {
       }
     }
     
-    stage("Login to Docker Hub") {
-      steps {
-        script {
-          docker.withRegistry("https://index.docker.io/v1/", "docker") {
-            docker.login(username: admin, password: dockerhub)
-          }
-        }
-      }
-    }
-    
+
     stage("Push Docker image to Docker Hub") {
       steps {
         script {
