@@ -1,5 +1,5 @@
 
 FROM adoptopenjdk:11-jre-hotspot
 WORKDIR /app
-COPY target/exam.jar .
+COPY target/*.jar .
 CMD ["java", "-jar", "exam.jar"]
