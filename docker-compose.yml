@@ -13,11 +13,6 @@ services:
 
   nexus:
     image: sonatype/nexus3
-    restart: on-failure
-    environment:
-      - NEXUS_USERNAME=admin
-      - NEXUS_PASSWORD=nexus
-
     volumes:
       - nexus-data:/nexus-data
     ports:
